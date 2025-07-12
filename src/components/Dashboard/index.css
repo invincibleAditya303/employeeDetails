@@ -1,0 +1,58 @@
+.dashboard-bg-container {
+    width: 100vw;
+    height: 100vh;
+}
+
+.sorting-container{
+    width: 70vw;
+    height: 5vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sorting-type-container {
+    width: 20vw;
+    height: 3vh;
+    display: flex;
+}
+
+.sorting-label {
+    font-size: 16px;
+    font-family: "Roboto";
+    font-weight: 400;
+}
+
+.select-sort {
+    height: 100%;
+    width: 5vw;
+}
+
+.sort-type {
+    font-size: 12px;
+    font-family: "Roboto";
+}
+
+.add-button {
+    width: 6vw;
+    height: 100%;
+    background-color: #2ca321;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: "Roboto";
+    padding: 3px;
+    border-radius: 3px;
+    border-width: 0px;
+    cursor: pointer;
+    outline: none;
+}
+
+.employees-list-container {
+    width: 70vw;
+    min-height: 30vh;
+    background-color: #777777;
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0px;
+    margin-top: 20px;
+}

@@ -1,0 +1,41 @@
+.employee-list-item-container {
+    width: 20vw;
+    height: 28vh;
+    background-color: #ffffff;
+    border-radius: 5px;
+    list-style-type: none;
+    margin-left: 10px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.employee-name {
+    font-size: 18px;
+    font-family: "Roboto";
+    font-weight: bold;
+    padding-left: 5px;
+}
+
+.employee-details {
+    font-weight: normal;
+}
+
+.buttons-container {
+    width: 100%;
+    height: 5vh;
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+}
+
+.click-button {
+    height: 100%;
+    width: 5vw;
+    font-size: 14px;
+    font-family: "Roboto";
+    padding: 2px;
+    border-radius: 1px;
+    border-width: 0px;
+    cursor: pointer;
+    outline: none;
+}
