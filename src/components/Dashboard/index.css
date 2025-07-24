@@ -1,20 +1,59 @@
 .dashboard-bg-container {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    background-color: #777777;
+    display: flex;
+    align-items: stretch;
+}
+
+.dashboard-container {
+    width: 100%;
+    height: 90%;
+}
+
+@media (width < 776px) {
+    .dashboard-container {
+        z-index: 0;
+    }
+}
+
+.compress-container {
+    width: 70%;
+}
+
+@media (width < 776px) {
+    .compress-container {
+        width: 100%;
+    }
 }
 
 .sorting-container{
-    width: 70vw;
-    height: 5vh;
+    width: 100%;
+    height: 8vh;
+    background-color: #ffffff;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+@media (width < 776px) {
+    .sorting-container {
+        height: 6vh;
+    }
 }
 
 .sorting-type-container {
     width: 20vw;
     height: 3vh;
     display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+
+@media (width < 776px) {
+    .sorting-type-container {
+        width: 30vw;
+    }
 }
 
 .sorting-label {
@@ -23,9 +62,22 @@
     font-weight: 400;
 }
 
+@media (width < 776px) {
+    .sorting-label {
+        font-size: 12px;
+    }
+}
+
 .select-sort {
     height: 100%;
     width: 5vw;
+    margin-right: 5px;
+}
+
+@media (width < 776px) {
+    .select-sort {
+        width: 12vw;
+    }
 }
 
 .sort-type {
@@ -35,24 +87,38 @@
 
 .add-button {
     width: 6vw;
-    height: 100%;
+    height: 4vh;
     background-color: #2ca321;
     color: #ffffff;
     font-size: 14px;
     font-family: "Roboto";
     padding: 3px;
-    border-radius: 3px;
+    border-radius: 4px;
     border-width: 0px;
+    margin-right: 15px;
     cursor: pointer;
     outline: none;
 }
 
+@media (width < 776px) {
+    .add-button {
+        width: 20vw;
+        font-size: 12px;
+    }
+}
+
 .employees-list-container {
-    width: 70vw;
-    min-height: 30vh;
-    background-color: #777777;
+    width: 100%;
+    min-height: 60vh;
     display: flex;
     flex-wrap: wrap;
     padding-left: 0px;
-    margin-top: 20px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+@media (width < 776px) {
+    .employees-list-container {
+        justify-content: center;
+    }
 }

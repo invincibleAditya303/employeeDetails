@@ -9,6 +9,14 @@
     margin-top: 15px;
 }
 
+@media (width < 776px) {
+    .employee-list-item-container {
+        width: 90%;
+        height: 25vh;
+        margin-left: 0px;
+    }
+}
+
 .employee-name {
     font-size: 18px;
     font-family: "Roboto";
@@ -21,16 +29,17 @@
 }
 
 .buttons-container {
-    width: 100%;
+    width: 90%;
     height: 5vh;
     background-color: transparent;
     display: flex;
     justify-content: space-between;
+    margin-left: 12px;
 }
 
 .click-button {
     height: 100%;
-    width: 5vw;
+    width: 4vw;
     font-size: 14px;
     font-family: "Roboto";
     padding: 2px;
@@ -38,4 +47,12 @@
     border-width: 0px;
     cursor: pointer;
     outline: none;
+}
+
+@media (width < 776px) {
+    .click-button {
+        width: 10vw;
+        height: 3vh;
+        font-size: 12px;
+    }
 }
