@@ -16,7 +16,7 @@ const apisStatusConstants = {
 }
 
 class Dashboard extends Component {
-    state = {employeesList: JSON.parse(localStorage.getItem("Employees List")) || [], isFilterActive: false, searchInput: "", sortType: "none", pageNo: 1, apiStatus: apisStatusConstants.initial}
+    state = {employeesList: JSON.parse(localStorage.getItem("Employees List")) || [], filteredList: [], isFilterGroupClicked: false, isFilterActive: false, searchInput: "", sortType: "none", firstNameFilter: "", departmentFilter: "", roleFilter: "", pageNo: 1, apiStatus: apisStatusConstants.initial}
 
 
     componentDidMount () {
@@ -38,6 +38,40 @@ class Dashboard extends Component {
     }
 
     onClickFilter = () => {this.setState(prevState => ({isFilterActive: !prevState.isFilterActive}))}
+
+    onChangeFirstName = eventType => {this.setState({firstNameFilter: eventType})}
+
+    onChangeDepartment = eventType => {this.setState({departmentFilter: eventType})}
+
+    onChangeRole = eventType => {this.setState({roleFilter: eventType})}
+
+    onSubmitFilterForm = filterEvent => {
+        filterEvent.preventDefault()
+
+        const {employeesList, searchInput, pageNo, firstNameFilter, departmentFilter, roleFilter} = this.state
+        const upperLimit = pageNo * 8
+
+        let currentEmployeesList = employeesList.slice(upperLimit-8, upperLimit)
+        currentEmployeesList = currentEmployeesList.filter(eachEmployee => (eachEmployee.name ?? '').toLowerCase().includes(searchInput.toLowerCase()))
+        const filtererdEmployeesList = currentEmployeesList.filter(eachEmployee => {
+            const firstName = eachEmployee.name.split(" ")[0]
+
+            const matchesName = firstNameFilter? firstName.toLowerCase().includes(firstNameFilter.toLowerCase()): false;
+
+            const matchesDept = departmentFilter? eachEmployee.department.toLowerCase() === departmentFilter.toLocaleLowerCase(): false;
+
+            const matchesRole = roleFilter? eachEmployee.role.toLowerCase().includes(roleFilter.toLowerCase()): false;
+
+            // Include only if at least one is true
+            return matchesName || matchesDept || matchesRole;
+        })
+
+        this.setState({filteredList: filtererdEmployeesList, isFilterGroupClicked: true})
+    }
+
+    onClickReset = () => {
+        this.setState({firstNameFilter: "", departmentFilter: "", roleFilter: "", isFilterGroupClicked: false})
+    }
 
     onClickSearch = inputText => {this.setState({searchInput: inputText})}
 
@@ -95,10 +129,18 @@ class Dashboard extends Component {
     )
 
     renderSuccessView = () => {
-        const {employeesList, searchInput, pageNo} = this.state
+        const {employeesList, searchInput, pageNo, filteredList, isFilterGroupClicked} = this.state
         const upperLimit = pageNo * 8
 
-        let currentEmployeesList = employeesList.slice(upperLimit-8, upperLimit)
+        let currentEmployeesList
+
+        if (isFilterGroupClicked) {
+            currentEmployeesList = filteredList
+        }
+        else {
+            currentEmployeesList = employeesList.slice(upperLimit-8, upperLimit)
+        }
+
         currentEmployeesList = currentEmployeesList.filter(eachEmployee => (eachEmployee.name ?? '').toLowerCase().includes(searchInput.toLowerCase()))
 
         return (
@@ -125,7 +167,7 @@ class Dashboard extends Component {
       }
 
     render() {
-        const {employeesList, isFilterActive, searchInput, sortType, pageNo} = this.state
+        const {employeesList, isFilterActive, searchInput, sortType, pageNo, firstNameFilter, departmentFilter, roleFilter} = this.state
         const upperLimit = pageNo * 8
 
         let currentEmployeesList = employeesList.slice(upperLimit-8, upperLimit)
@@ -159,7 +201,18 @@ class Dashboard extends Component {
                     <Pagination pageNo={pageNo} totalPages={totalPages} onClickPrev={this.onClickPrev} onClickNext={this.onClickNext} />
                     <Footer />
                 </div>
-                <FilterGroup isFilterActive={isFilterActive} currentEmployeesList={currentEmployeesList} />
+                <FilterGroup 
+                    isFilterActive={isFilterActive} 
+                    currentEmployeesList={currentEmployeesList} 
+                    firstNameFilter={firstNameFilter} 
+                    departmentFilter={departmentFilter} 
+                    roleFilter={roleFilter}
+                    onChangeFirstName={this.onChangeFirstName}
+                    onChangeDepartment={this.onChangeDepartment}
+                    onChangeRole= {this.onChangeRole}
+                    onSubmitFilterForm={this.onSubmitFilterForm}
+                    onClickReset={this.onClickReset}
+                />
             </div>
         )
     }
